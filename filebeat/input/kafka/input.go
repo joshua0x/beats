@@ -302,24 +302,24 @@ func (h *groupHandler) createEvents(
 }
 
 func (h *groupHandler) Setup(session sarama.ConsumerGroupSession) error {
-	h.Lock()
+	//h.Lock()
 	h.session = session
-	h.Unlock()
+	//h.Unlock()
 	return nil
 }
 
 func (h *groupHandler) Cleanup(_ sarama.ConsumerGroupSession) error {
-	h.Lock()
+	//h.Lock()
 	h.session = nil
-	h.Unlock()
+	//h.Unlock()
 	return nil
 }
 
 // ack informs the kafka cluster that this message has been consumed. Called
 // from the input's ACKEvents handler.
 func (h *groupHandler) ack(message *sarama.ConsumerMessage) {
-	h.Lock()
-	defer h.Unlock()
+	//h.Lock()
+	//defer h.Unlock()
 	if h.session != nil {
 		h.session.MarkMessage(message, "")
 	}
